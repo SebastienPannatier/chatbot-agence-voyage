@@ -16,6 +16,12 @@ entities:
   - value_attribute
   - attribute
 
+action:
+  - action_query_entity
+  - action_query_all_attribute_of_entity
+  - action_query_entity_by_attribute
+  - action_query_attribute
+
 slots:
   object_type:
     type: any
