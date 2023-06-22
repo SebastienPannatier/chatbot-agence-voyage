@@ -12,13 +12,9 @@ intents:
   - query_attribute
 
 entities:
-  - object_type
-  - mention
+  - entity
+  - value_attribute
   - attribute
-  - cuisine
-  - attribute
-  - restaurant
-  - ville
 
 slots:
   object_type:
