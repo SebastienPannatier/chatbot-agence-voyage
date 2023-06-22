@@ -2,29 +2,22 @@ version: "3.1"
 
 stories:
 
-- story: happy path
+- story: query entity
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_great
-  - action: utter_happy
+  - intent: query_entity
+  - action: action_query_entity
 
-- story: sad path 1
+- story: query all attribute
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: affirm
-  - action: utter_happy
+  - intent: query_all_attribute_of_entity
+  - action: action_query_all_attribute_of_entity
 
-- story: sad path 2
+- story: query entity by attribute
   steps:
-  - intent: greet
-  - action: utter_greet
-  - intent: mood_unhappy
-  - action: utter_cheer_up
-  - action: utter_did_that_help
-  - intent: deny
-  - action: utter_goodbye
+  - intent: query_entity_by_attribute
+  - action: action_query_entity_by_attribute
+
+- story: query attribute
+  steps:
+  - intent: query_attribute
+  - action: action_query_attribute
