@@ -38,24 +38,26 @@ slots:
       entity: attribute
 
 responses:
-  utter_greet:
-  - text: "Hey! How are you?"
-
-  utter_cheer_up:
-  - text: "Here is something to cheer you up:"
-    image: "https://i.imgur.com/nGF1K8f.jpg"
+  utter_salutation:
+  - text: "Bonjour, puis-je vous aider avec votre voyage ?"
+  - text: "Bienvenue, comment puis-je vous aider?"
+  - text: "Bonjour, en quoi puis-je être utile?"
+  - text: "Bonjour, je suis prêt à vous aider"
 
   utter_did_that_help:
-  - text: "Did that help you?"
-
-  utter_happy:
-  - text: "Great, carry on!"
+  - text: "Est-ce que cette réponse vous a été utile?"
+  - text: "Ai-je bien répondu à votre question?"
+  - text: "Réponse correcte?"
 
   utter_goodbye:
   - text: "Bye"
+  - text: "A la prochaine"
+  - text: "Aurevoir"
 
   utter_iamabot:
-  - text: "I am a bot, powered by Rasa."
+  - text: "Je suis un robot chargé de vous aider pour vos voyages"
+  - text: "Je ne suis qu'un robot, je peux vous aider avec vos voyages"
+  - text: "Je ne suis pas humain, mais je suis tout aussi intelligent"
 
 session_config:
   session_expiration_time: 60
