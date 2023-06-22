@@ -5,9 +5,37 @@ intents:
   - goodbye
   - affirm
   - deny
-  - mood_great
-  - mood_unhappy
   - bot_challenge
+  - query_knowledge_base
+
+entities:
+  - object_type
+  - mention
+  - attribute
+  - cuisine
+  - attribute
+  - restaurant
+  - ville
+
+slots:
+  object_type:
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: form_entity
+      entity: object_type
+  mention:
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: mention
+  attribute:
+    type: any
+    influence_conversation: false
+    mappings:
+    - type: from_entity
+      entity: attribute
 
 responses:
   utter_greet:
