@@ -27,7 +27,7 @@ slots:
     type: any
     influence_conversation: false
     mappings:
-    - type: form_entity
+    - type: from_entity
       entity: entity
   value_attribute:
     type: any
