@@ -23,18 +23,18 @@ action:
   - action_query_attribute
 
 slots:
-  object_type:
+  entity:
     type: any
     influence_conversation: false
     mappings:
     - type: form_entity
-      entity: object_type
-  mention:
+      entity: entity
+  value_attribute:
     type: any
     influence_conversation: false
     mappings:
     - type: from_entity
-      entity: mention
+      entity: value_attribute
   attribute:
     type: any
     influence_conversation: false
