@@ -40,7 +40,7 @@ nlu:
     - Est ce que je parle à un bot?
     - Est-ce que je parle à un human?
 
-- intent: query_knowledge_base
+- intent: query_entity
   examples: |
     - Quels [restaurants]{"entity": "object_type", "value": "restaurant"} peux-tu me recommander ?
     - Quels [hotels]{"entity": "object_type", "value": "hotel"} peux-tu me recommander ?
@@ -48,17 +48,29 @@ nlu:
     - Liste quelques [hotels]{"entity": "object_type", "value": "hotel"}
     - Peux-tu me nommer quelques [restaurants]{"entity": "object_type", "value": "restaurant"} s'il te plait?
     - Peux-tu me nommer quelques [hotels]{"entity": "object_type", "value": "hotel"} s'il te plait?
+
+- intent: query_all_attribute_of_entity
+  examples: |
     - Peux-tu me montrer des options pour les [restaurants]{"entity": "object_type", "value": "restaurant"}
     - Peux-tu me montrer des options pour les [hotels]{"entity": "object_type", "value": "hotel"}
+    - A propos de [Sabor Latino](restaurant)?
+    - A propos du [premier]{"entity": "mention", "value": 1} ?
+
+- intent: query_entity_by_attribute
+  examples: |
     - Liste des [restaurants]{"entity": "object_type", "value": "restaurant"} [francais](cuisine)
     - Liste des [hotels]{"entity": "object_type", "value": "restaurant"} à [Miami](ville)
     - Connais-tu des [restaurants]{"entity": "object_type", "value": "restaurant"} [mexicain](cuisine)?
+    
+- intent: query_attribute
+  examples: |
+    - Peux tu me donner la [moyenne de prix](attribute) de [ce restaurant](mention)?
+    - Quelle est la [moyenne de prix]{"entity": "attribute", "value": "prix"} de [Golden Dragon](restaurant)?
+    - Est-ce que le [premier]{"entity": "mention", "value": "1"} a [des places exterieur]{"entity": "attribute", "value": "exterieur"}?
+    - Sais-tu quel est le type de [cuisine](attribute) de [dernier]{"entity": "mention", "value": "LAST"} ?
     - Connais-tu la [moyenne de prix]{"entity": "attribute", "value": "prix"} de [celui-ci](mention)?
     - Quel est [son](mention) type de [cuisine](attribute) ?
     - Quel est [son](mention) [prix](attribute) ?
-    - Sais-tu quel est le type de [cuisine](attribute) de [dernier]{"entity": "mention", "value": "LAST"} ?
-    - Est-ce que le [premier]{"entity": "mention", "value": "1"} a [des places exterieur]{"entity": "attribute", "value": "exterieur"}?
-    - Quelle est la [moyenne de prix]{"entity": "attribute", "value": "prix"} de [Golden Dragon](restaurant)?
-    - A propos de [Sabor Latino](restaurant)?
-    - Peux tu me donner la [moyenne de prix](attribute) de [ce restaurant](mention)?
     - Quel est [son](mention) [type de cuisine](attribute) ?
+    
+    

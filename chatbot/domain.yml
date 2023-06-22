@@ -6,7 +6,10 @@ intents:
   - affirm
   - deny
   - bot_challenge
-  - query_knowledge_base
+  - query_entity
+  - query_all_attribute_of_entity
+  - query_entity_by_attribute
+  - query_attribute
 
 entities:
   - object_type
