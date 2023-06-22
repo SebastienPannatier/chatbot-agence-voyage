@@ -72,3 +72,47 @@ nlu:
     - Sais-tu quel est le type de [cuisine](attribute) de [Le Petit Birsto](value_attribute) ?
     - Connais-tu la [moyenne de prix](attribute) de [Alpine Lodge](value_attribute)?
     - Quel est  type de [cuisine](attribute) ?
+
+  # lookup
+
+- lookup: entity
+  examples: |
+    - restaurant
+    - hotel
+
+- lookup: attribute
+  examples: |
+    - nom
+    - prix
+    - petit-dej
+    - ville
+    - wifi
+    - etoile
+    - piscine
+    - cuisine
+    - exterieur
+
+  # Synonym
+
+- synonym: restaurant
+  examples: |
+    - restau
+
+- synonym: petit-dej
+  examples: |
+    - petit dejeuner
+    - ptit dej
+    - petit dej
+    - petit-dejeuner
+
+- synonym: exterieur
+  examples: |
+    - jardin
+    - terasse
+    - cours
+    - dehor
+- synonym: cuisine
+  examples: |
+    - nationnalité
+    - origine
+    - pays
