@@ -88,7 +88,7 @@ class Action_Query_All_Attribute_Of_Entity(Action):
                 buttons_list.append({"payload": "/query_attribute{\"attribute\":\""+attr_button_name+"\", \"value_attribute\":\""+entity_type[0]+"\"}", "title": attr_button_name})
             dispatcher.utter_message(text="Que voulez vous savoir exactement?", buttons=buttons_list)
         else:
-            dispatcher.utter_message("Je n'ai pas bien compris ce que vous vouliez savoir")
+            dispatcher.utter_message(text="Je ne ne trouve pas votre établissement.", buttons=[{"payload":"/query_entity{\"entity\":\"restaurant\"}", "title": "Liste des restaurants"},{"payload":"/query_entity{\"entity\":\"hotel\"}", "title": "Liste des hotels"}])
 
         return []
     
@@ -114,6 +114,34 @@ class Action_Query_Attribute(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(text="action_query_attribute")
+        intent_entities = tracker.latest_message.get("entities")
+        value_attribute = has_entity_type(intent_entities, "value_attribute")
+        attribute = has_entity_type(intent_entities, "attribute")
+
+        if not value_attribute or not attribute:
+            dispatcher.utter_message(text="Je ne suis pas sur de bien comprendre, essayez de me donner le nom d'un établissement ainsi que ce que vous voulez savoir sur lui")
+        else:
+            try:
+                entity_attr = send_request_to_typedb(f"match $x isa entity, has attribute \"{value_attribute[0]}\", has {attribute[0]} $attr; get $attr;")
+            except:
+                entity_attr = None
+            
+            if entity_attr and entity_attr[0] is not False:
+                answer = None
+                if entity_attr[0].get('attr')._value == False:
+                    answer = "Non"
+                elif entity_attr[0].get('attr')._value == True:
+                    answer = "Oui"
+                else:
+                    answer = entity_attr[0].get('attr')._value
+                dispatcher.utter_message(text="Voici ce que j'ai trouvé pour votre demande:")
+                dispatcher.utter_message(text=f"{answer}")
+            else:
+                hotel_restaurant = send_request_to_typedb(f"match $x isa entity, has nom \"{value_attribute[0]}\";")
+                if hotel_restaurant:
+                    dispatcher.utter_message(text="Je ne trouve pas l'information demandé pour cet établisssement.", buttons=[{"payload": "/query_all_attribute_of_entity{\"value_attribute\":\""+value_attribute[0]+"\"}", "title": "Voir les possibilités pour "+value_attribute[0]}])
+                else:
+                    dispatcher.utter_message(text="Je ne ne trouve pas votre établissement.", buttons=[{"payload":"/query_entity{\"entity\":\"restaurant\"}", "title": "Liste des restaurants"},{"payload":"/query_entity{\"entity\":\"hotel\"}", "title": "Liste des hotels"}])
+
 
         return []
