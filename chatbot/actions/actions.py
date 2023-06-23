@@ -71,29 +71,24 @@ class Action_Query_All_Attribute_Of_Entity(Action):
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
         intent_entities = tracker.latest_message.get("entities")
-        entity_type = has_entity_type(intent_entities, "entity")
+        entity_type = has_entity_type(intent_entities, "value_attribute")
 
-        # A FAIRE!!!!!
+        entity_attr = None
 
-        dispatcher.utter_message("of entity")
+        try:
+            if(entity_type):
+                entity_attr = send_request_to_typedb(f"match $x isa entity, has attribute \"{entity_type[0]}\", has $attr; $attr isa! $attr-type; get $attr-type;")
+        except:
+            pass
 
-        return []
-    
-class Action_Query_All_Attribute_Of_Specific_Entity(Action):
-
-    def name(self) -> Text:
-        return "action_query_all_attribute_of_specific_entity"
-
-    def run(self, dispatcher: CollectingDispatcher,
-            tracker: Tracker,
-            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
-
-        intent_entities = tracker.latest_message.get("entities")
-        entity_type = has_entity_type(intent_entities, "entity")
-
-        # A FAIRE!!!!!
-
-        dispatcher.utter_message("of specific entitty")
+        if entity_attr:
+            buttons_list = []
+            for attr in entity_attr:
+                attr_button_name = str(attr.get('attr-type')._label)
+                buttons_list.append({"payload": "/query_attribute{\"attribute\":\""+attr_button_name+"\", \"value_attribute\":\""+entity_type[0]+"\"}", "title": attr_button_name})
+            dispatcher.utter_message(text="Que voulez vous savoir exactement?", buttons=buttons_list)
+        else:
+            dispatcher.utter_message("Je n'ai pas bien compris ce que vous vouliez savoir")
 
         return []
     
