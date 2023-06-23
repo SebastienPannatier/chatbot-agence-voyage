@@ -73,7 +73,27 @@ class Action_Query_All_Attribute_Of_Entity(Action):
         intent_entities = tracker.latest_message.get("entities")
         entity_type = has_entity_type(intent_entities, "entity")
 
-        
+        # A FAIRE!!!!!
+
+        dispatcher.utter_message("of entity")
+
+        return []
+    
+class Action_Query_All_Attribute_Of_Specific_Entity(Action):
+
+    def name(self) -> Text:
+        return "action_query_all_attribute_of_specific_entity"
+
+    def run(self, dispatcher: CollectingDispatcher,
+            tracker: Tracker,
+            domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
+
+        intent_entities = tracker.latest_message.get("entities")
+        entity_type = has_entity_type(intent_entities, "entity")
+
+        # A FAIRE!!!!!
+
+        dispatcher.utter_message("of specific entitty")
 
         return []
     

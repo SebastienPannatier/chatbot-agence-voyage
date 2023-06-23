@@ -7,10 +7,19 @@ stories:
   - intent: query_entity
   - action: action_query_entity
 
-- story: query all attribute
+- story: query all attribute of entity
   steps:
   - intent: query_all_attribute_of_entity
+    entities:
+      - entity: restaurant
   - action: action_query_all_attribute_of_entity
+
+- story: query all attribute of specific entity
+  steps:
+  - intent: query_all_attribute_of_entity
+    entities:
+      - value_attribute: Sabor Latino
+  - action: action_query_all_attribute_of_specific_entity
 
 - story: query entity by attribute
   steps:
