@@ -52,7 +52,13 @@ class Action_Query_entity(Action):
             for r in result:
                 dispatcher.utter_message(f"{r.get('nom')._value}")
         else:
-            dispatcher.utter_message(text=f"Je ne parviens pas à trouver ce que vous me demandez. Que cherchez-vous exactement?", buttons=[{"payload":"/query_entity{\"entity\":\"restaurant\"}", "title":"Restaurant"},{"payload":"/query_entity{\"entity\":\"hotel\"}", "title":"Hotel"}])
+            sub_entity = send_request_to_typedb(f"match $e sub entity;")
+            buttons_list = []
+            for s in sub_entity:
+                buttons_name = str(s.get('e')._label)
+                if not buttons_name == "entity":
+                    buttons_list.append({"payload": "/query_entity{\"entity\":\""+buttons_name+"\"}", "title": buttons_name})
+            dispatcher.utter_message(text=f"Je ne parviens pas à trouver ce que vous me demandez. Que cherchez-vous exactement?", buttons=buttons_list)
         return []
 
 class Action_Query_All_Attribute_Of_Entity(Action):
@@ -64,7 +70,10 @@ class Action_Query_All_Attribute_Of_Entity(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(text="action_query_all_attribute_of_entity")
+        intent_entities = tracker.latest_message.get("entities")
+        entity_type = has_entity_type(intent_entities, "entity")
+
+        
 
         return []
     
