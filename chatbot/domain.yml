@@ -19,7 +19,6 @@ entities:
 actions:
   - action_query_entity
   - action_query_all_attribute_of_entity
-  - action_query_all_attribute_of_specific_entity
   - action_query_entity_by_attribute
   - action_query_attribute
 

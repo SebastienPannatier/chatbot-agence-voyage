@@ -54,9 +54,10 @@ nlu:
 
 - intent: query_all_attribute_of_entity
   examples: |
-    - Peux-tu me montrer des options pour les [restaurants](entity)
-    - Peux-tu me montrer des options pour les [hotels](entity)
     - A propos de [Sabor Latino](value_attribute)?
+    - Que peux tu me dire pour [Sabor Latino](value_attribute)?
+    - Donne moi plus d'informations du [Sabor Latino](value_attribute)
+    - Dis en moi plus à propos du [Sabor Latino](value_attribute)
 
 - intent: query_entity_by_attribute
   examples: |
@@ -71,7 +72,6 @@ nlu:
     - Est-ce que le [La belle epoque](value_attribute) a [des places exterieur](attribute)?
     - Sais-tu quel est le type de [cuisine](attribute) de [Le Petit Birsto](value_attribute) ?
     - Connais-tu la [moyenne de prix](attribute) de [Alpine Lodge](value_attribute)?
-    - Quel est  type de [cuisine](attribute) ?
 
   # lookup
 
