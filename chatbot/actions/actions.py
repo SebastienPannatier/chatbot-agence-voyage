@@ -41,7 +41,10 @@ class Action_Query_entity(Action):
         intent_entities = tracker.latest_message.get("entities")
         entity_type = has_entity_type(intent_entities, "entity")
 
-        result = send_request_to_typedb(f"match $x isa {entity_type[0]}, has nom $nom;")
+        if entity_type == False:
+            result = [False]
+        else:
+            result = send_request_to_typedb(f"match $x isa {entity_type[0]}, has nom $nom;")
 
 
         if result[0] != False:
@@ -49,7 +52,7 @@ class Action_Query_entity(Action):
             for r in result:
                 dispatcher.utter_message(f"{r.get('nom')._value}")
         else:
-            dispatcher.utter_message(text=f"Je ne parviens pas à trouver '{entity_type[0]}'. Que cherchez-vous exactement?", buttons=[{"payload":"/query_entity{\"entity\":\"restaurant\"}", "title":"Restaurant"},{"payload":"/query_entity{\"entity\":\"hotel\"}", "title":"Hotel"}])
+            dispatcher.utter_message(text=f"Je ne parviens pas à trouver ce que vous me demandez. Que cherchez-vous exactement?", buttons=[{"payload":"/query_entity{\"entity\":\"restaurant\"}", "title":"Restaurant"},{"payload":"/query_entity{\"entity\":\"hotel\"}", "title":"Hotel"}])
         return []
 
 class Action_Query_All_Attribute_Of_Entity(Action):

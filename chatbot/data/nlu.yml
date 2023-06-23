@@ -97,6 +97,7 @@ nlu:
 - synonym: restaurant
   examples: |
     - restau
+    - restaurants
 
 - synonym: petit-dej
   examples: |
@@ -111,8 +112,14 @@ nlu:
     - terasse
     - cours
     - dehor
+    - exterieurs
 - synonym: cuisine
   examples: |
     - nationnalité
     - origine
     - pays
+    - cuisines
+
+- synonym: hotel
+  examples: |
+    - hotels
