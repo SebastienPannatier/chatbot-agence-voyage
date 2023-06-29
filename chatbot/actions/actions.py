@@ -101,7 +101,24 @@ class Action_Query_Entity_By_Attribute(Action):
             tracker: Tracker,
             domain: Dict[Text, Any]) -> List[Dict[Text, Any]]:
 
-        dispatcher.utter_message(text="action_query_entity_by_attribute")
+        intent_entities = tracker.latest_message.get("entities")
+        entity = has_entity_type(intent_entities, "entity")
+        value_attribute = has_entity_type(intent_entities, "value_attribute")
+
+        result = None
+
+        try:
+            if entity and value_attribute:
+                result = send_request_to_typedb(f"match $res isa {entity[0]}, has attribute \"{value_attribute[0]}\", has nom $nom; get $nom;")
+        except:
+            pass
+
+        if result:
+            dispatcher.utter_message(f"Voici ce que j'ai pu trouver pour votre demande.")
+            for r in result:
+                dispatcher.utter_message(f"{r.get('nom')._value}")
+        else:
+            dispatcher.utter_message(f"Je suis désolé, je n'ai pas trouvé d'établissement correspondant à vos critères.")
 
         return []
     
