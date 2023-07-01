@@ -22,26 +22,6 @@ actions:
   - action_query_entity_by_attribute
   - action_query_attribute
 
-slots:
-  entity:
-    type: any
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: entity
-  value_attribute:
-    type: any
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: value_attribute
-  attribute:
-    type: any
-    influence_conversation: false
-    mappings:
-    - type: from_entity
-      entity: attribute
-
 responses:
   utter_salutation:
   - text: "Bonjour, puis-je vous aider avec votre voyage ?"
